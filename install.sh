@@ -14,7 +14,7 @@ ORANGE='\e[1;93m'
 NC='\e[0m'
 
 if [[ $EUID -ne 0 ]]; then
-   echo -e "${RED}This script must be run as root"
+   echo -e "${RED}这个脚本必须以root权限运行"
    exit 1
 fi
 
@@ -43,11 +43,11 @@ echo "  ███    █▀      ███    █▀  ████████�
 echo "                                         ▀                                                                            ▀         ";
 
 echo -e "${BLUE}                                    https://github.com/Z4nzu/hackingtool ${NC}"
-echo -e "${RED}                                     [!] This Tool Must Run As ROOT [!]${NC}\n"
-echo -e "${CYAN}              Select Best Option : \n"
+echo -e "${RED}                                     [!] 这个工具必须以root运行 [!]${NC}\n"
+echo -e "${CYAN}              选择合适的选项 : \n"
 echo -e "${WHITE}              [1] Kali Linux / Parrot-Os (apt)"
 echo -e "${WHITE}              [2] Arch Linux (pacman)" # added arch linux support because of feature request #231
-echo -e "${WHITE}              [0] Exit "
+echo -e "${WHITE}              [0] 退出 "
 
 echo -e "${COLOR}┌──($USER㉿$HOST)-[$(pwd)]"
 read -p "└─$>>" choice
@@ -59,12 +59,12 @@ bin_dir="/usr/bin"
 
 # Check if the user chose a valid option and perform the installation steps
 if [[ $choice =~ ^[1-2]+$ ]]; then
-    echo -e "${YELLOW}[*] Checking Internet Connection ..${NC}"
+    echo -e "${YELLOW}[*] 检查网络连接 ..${NC}"
     echo "";
     if curl -s -m 10 https://www.google.com > /dev/null || curl -s -m 10 https://www.github.com > /dev/null; then
-        echo -e "${GREEN}[✔] Internet connection is OK [✔]${NC}"
+        echo -e "${GREEN}[✔] 网络连接正常 [✔]${NC}"
         echo "";
-        echo -e "${YELLOW}[*] Updating package list ..."
+        echo -e "${YELLOW}[*] 正在更新程序包列表 ..."
         # Perform installation steps based on the user's choice
         if [[ $choice == 1 ]]; then
             sudo apt update -y && sudo apt upgrade -y
@@ -76,37 +76,37 @@ if [[ $choice =~ ^[1-2]+$ ]]; then
             exit
         fi
         echo "";
-        echo -e "${YELLOW}[*] Checking directories...${NC}"
+        echo -e "${YELLOW}[*] 正在检查目录...${NC}"
         if [[ -d "$install_dir" ]]; then
-            echo -e -n "${RED}[!] The directory $install_dir already exists. Do you want to replace it? [y/n]: ${NC}"
+            echo -e -n "${RED}[!] 目录 $install_dir 已经存在. 你想要替换他吗？? [y/n]: ${NC}"
             read input
             if [[ $input == "y" ]] || [[ $input == "Y" ]]; then
-                echo -e "${YELLOW}[*]Removing existing module.. ${NC}"
+                echo -e "${YELLOW}[*]正在删除现有模块.. ${NC}"
                 sudo rm -rf "$install_dir"
             else
-                echo -e "${RED}[✘]Installation Not Required[✘] ${NC}"
+                echo -e "${RED}[✘]不需要安装[✘] ${NC}"
                 exit
             fi
         fi
         echo "";
-        echo -e "${YELLOW}[✔] Downloading hackingtool...${NC}"
+        echo -e "${YELLOW}[✔] 下载中...${NC}"
         if sudo git clone https://github.com/Z4nzu/hackingtool.git $install_dir; then
             # Install virtual environment
-            echo -e "${YELLOW}[*] Installing Virtual Environment...${NC}"
+            echo -e "${YELLOW}[*] 安装虚拟环境...${NC}"
             if [[ $choice == 1 ]]; then
               sudo apt install python3-venv -y
             elif [[ $choice == 2 ]]; then
-              echo "Python 3.3+ comes with a module called venv.";
+              echo "Python 3.3+附带了一个名为venv的模块.";
             fi
             echo "";
             # Create a virtual environment for the tool
-            echo -e "${YELLOW}[*] Creating virtual environment..."
+            echo -e "${YELLOW}[*] 创建虚拟环境..."
             sudo python3 -m venv $install_dir/venv
             source $install_dir/venv/bin/activate
             # Install requirements
-            echo -e "${GREEN}[✔] Virtual Environment successfully [✔]${NC}";
+            echo -e "${GREEN}[✔] 虚拟环境就绪 [✔]${NC}";
             echo "";
-            echo -e "${YELLOW}[*] Installing requirements...${NC}"
+            echo -e "${YELLOW}[*] 安装必要的python鸡...${NC}"
             if [[ $choice == 1 ]]; then
                 pip3 install -r $install_dir/requirements.txt
                 sudo apt install figlet -y
@@ -116,28 +116,28 @@ if [[ $choice =~ ^[1-2]+$ ]]; then
                 sudo -u $SUDO_USER makepkg -si
                 sudo pacman -S figlet -y
             fi
-            # Create a shell script to launch the tool
-            echo -e "${YELLOW}[*] Creating a shell script to launch the tool..."
+            # Create a shell script to  the tool
+            echo -e "${YELLOW}[*] 创建一个shell脚本来启动该工具。.."
 #            echo '#!/bin/bash' > hackingtool.sh
             echo '#!/bin/bash' > $install_dir/hackingtool.sh
             echo "source $install_dir/venv/bin/activate" >> $install_dir/hackingtool.sh
             echo "python3 $install_dir/hackingtool.py \$@" >> $install_dir/hackingtool.sh
             chmod +x $install_dir/hackingtool.sh
             sudo mv $install_dir/hackingtool.sh $bin_dir/hackingtool
-            echo -e "${GREEN}[✔] Script created successfully [✔]"
+            echo -e "${GREEN}[✔] 脚本创建成功 [✔]"
         else
-            echo -e "${RED}[✘] Failed to download Hackingtool [✘]"
+            echo -e "${RED}[✘] 下载失败 [✘]"
             exit 1
         fi
 
     else
-       echo -e "${RED}[✘] Internet connection is not available [✘]${NC}"
+       echo -e "${RED}[✘] 网络连接错误 [✘]${NC}"
        exit 1
     fi
 
     if [ -d $install_dir ]; then
         echo "";
-        echo -e "${GREEN}[✔] Successfully Installed [✔]";
+        echo -e "${GREEN}[✔] 安装成功 [✔]";
         echo "";
         echo "";
         echo -e  "${ORANGE}[+]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++[+]"
@@ -146,13 +146,13 @@ if [[ $choice =~ ^[1-2]+$ ]]; then
         echo     "[+]                                                             [+]"
         echo -e  "${ORANGE}[+]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++[+]"
     else
-        echo -e "${RED}[✘] Installation Failed !!! [✘]";
+        echo -e "${RED}[✘] 安装失败 !!! [✘]";
         exit 1
     fi
 
 elif [[ $choice == 0 ]]; then
-    echo -e "${RED}[✘] Exiting tool [✘]"
+    echo -e "${RED}[✘] 退出工具 [✘]"
     exit 1
 else
-    echo -e "${RED}[!] Select Valid Option [!]"
+    echo -e "${RED}[!] 选择有效选项 [!]"
 fi
