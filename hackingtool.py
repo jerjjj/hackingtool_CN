@@ -64,7 +64,7 @@ all_tools = [
 
 
 class AllTools(HackingToolsCollection):
-    TITLE = "All tools"
+    TITLE = "所有工具"
     TOOLS = all_tools
 
     def show_info(self):
@@ -86,18 +86,18 @@ if __name__ == "__main__":
                 choice = input("Z4nzu =>> ").strip()
 
                 if choice == "1":
-                    inpath = input("Enter Path (with Directory Name) >> ").strip()
+                    inpath = input("确认目录 (使用目录名) >> ").strip()
                     with open(fpath, "w") as f:
                         f.write(inpath)
-                    print("Successfully Set Path to: {}".format(inpath))
+                    print("成功设置路径: {}".format(inpath))
                 elif choice == "2":
                     autopath = "/home/hackingtool/"
                     with open(fpath, "w") as f:
                         f.write(autopath)
-                    print("Your Default Path Is: {}".format(autopath))
+                    print("你的默认路径是: {}".format(autopath))
                     sleep(3)
                 else:
-                    print("Try Again..!!")
+                    print("再次尝试..!!")
                     sys.exit(0)
 
             with open(fpath) as f:
@@ -110,14 +110,14 @@ if __name__ == "__main__":
         # If not Linux and probably Windows
         elif system() == "Windows":
             print(
-                r"\033[91m Please Run This Tool On A Debian System For Best Results\e[00m"
+                r"\033[91m 最好使用debian系系统运行这个工具\e[00m"
             )
             sleep(2)
             webbrowser.open_new_tab("https://tinyurl.com/y522modc")
 
         else:
-            print("Please Check Your System or Open New Issue ...")
+            print("请检查你的系统或在GitHub提交反馈 ...")
 
     except KeyboardInterrupt:
-        print("\nExiting ..!!!")
+        print("\n退出 ..!!!")
         sleep(2)

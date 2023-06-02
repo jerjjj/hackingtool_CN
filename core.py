@@ -45,13 +45,13 @@ class HackingTool(object):
         if isinstance(options, list):
             self.OPTIONS = []
             if installable:
-                self.OPTIONS.append(('Install', self.install))
+                self.OPTIONS.append(('安装', self.install))
             if runnable:
-                self.OPTIONS.append(('Run', self.run))
+                self.OPTIONS.append(('运行', self.run))
             self.OPTIONS.extend(options)
         else:
             raise Exception(
-                "options must be a list of (option_name, option_fn) tuples")
+                "选项必须是 (选项名, 选项函数) 元组")
 
     def show_info(self):
         desc = self.DESCRIPTION
@@ -66,7 +66,7 @@ class HackingTool(object):
         for index, option in enumerate(self.OPTIONS):
             print(f"[{index + 1}] {option[0]}")
         if self.PROJECT_URL:
-            print(f"[{98}] Open project page")
+            print(f"[{98}] 打开项目页面")
         print(f"[{99}] Back to {parent.TITLE if parent is not None else 'Exit'}")
         option_index = input("Select an option : ").strip()
         try:
@@ -74,7 +74,7 @@ class HackingTool(object):
             if option_index - 1 in range(len(self.OPTIONS)):
                 ret_code = self.OPTIONS[option_index - 1][1]()
                 if ret_code != 99:
-                    input("\n\nPress ENTER to continue:").strip()
+                    input("\n\n按回车键继续:").strip()
             elif option_index == 98:
                 self.show_project_page()
             elif option_index == 99:
@@ -82,11 +82,11 @@ class HackingTool(object):
                     sys.exit()
                 return 99
         except (TypeError, ValueError):
-            print("Please enter a valid option")
-            input("\n\nPress ENTER to continue:").strip()
+            print("请输入有效选项")
+            input("\n\n按回车键继续:").strip()
         except Exception:
             print_exc()
-            input("\n\nPress ENTER to continue:").strip()
+            input("\n\n按回车键继续:").strip()
         return self.show_options(parent = parent)
 
     def before_install(self):
@@ -100,7 +100,7 @@ class HackingTool(object):
             self.after_install()
 
     def after_install(self):
-        print("Successfully installed!")
+        print("成功安装")
 
     def before_uninstall(self) -> bool:
         """ Ask for confirmation from the user and return """
@@ -130,7 +130,7 @@ class HackingTool(object):
         pass
 
     def is_installed(self, dir_to_check = None):
-        print("Unimplemented: DO NOT USE")
+        print("未实施：请勿使用")
         return "?"
 
     def show_project_page(self):
