@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 # Version 1.1.0
 import os
@@ -36,9 +37,9 @@ logo = """\033[33m
   ███    ███     ███    ███ ███    ███   ███ ▀███▄ ███  ███   ███   ███    ███          ███     ███    ███ ███    ███ ███▌    ▄ 
   ███    █▀      ███    █▀  ████████▀    ███   ▀█▀ █▀    ▀█   █▀    ████████▀          ▄████▀    ▀██████▀   ▀██████▀  █████▄▄██ 
                                          ▀                                                                            ▀                             
-                                    \033[34m[✔] https://github.com/Z4nzu/hackingtool   [✔]
+                                    \033[34m[✔] https://github.com/jerjjj/hackingtool   [✔]
                                     \033[34m[✔]            Version 1.1.0               [✔]
-                                    \033[91m[X] Please Don't Use For illegal Activity  [X]
+                                    \033[91m[X] 请勿用于非法活动  [X]
 \033[97m """
 
 all_tools = [
@@ -79,11 +80,11 @@ if __name__ == "__main__":
                 os.system('clear')
                 # run.menu()
                 print("""
-                        [@] Set Path (All your tools will be installed in that directory)
-                        [1] Manual 
-                        [2] Default
+                        [@] 设置Path (所有工具将会安装在那个目录)
+                        [1] 手动操作 
+                        [2] 默认
                 """)
-                choice = input("Z4nzu =>> ").strip()
+                choice = input("jerjjj =>> ").strip()
 
                 if choice == "1":
                     inpath = input("确认目录 (使用目录名) >> ").strip()
